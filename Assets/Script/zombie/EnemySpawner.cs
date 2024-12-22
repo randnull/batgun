@@ -3,8 +3,7 @@ using UnityEngine;
 public class EnemySpawner : MonoBehaviour
 {
     public GameObject enemyPrefab;
-    public float spawnInterval = 5f;
-    public float spawnRadius = 10f;
+    public float Radius = 10f;
     public Transform player; 
 
     private int TargetEnemyCount = 5;
@@ -22,13 +21,13 @@ public class EnemySpawner : MonoBehaviour
     void SpawnEnemy()
     {
         Vector3 spawnPosition = new Vector3(
-            transform.position.x + Random.Range(-spawnRadius, spawnRadius),
+            transform.position.x + Random.Range(-Radius, Radius),
             0f,
-            transform.position.z + Random.Range(-spawnRadius, spawnRadius)
+            transform.position.z + Random.Range(-Radius, Radius)
         );
 
         GameObject newEnemy = Instantiate(enemyPrefab, spawnPosition, Quaternion.identity);
 
-        newEnemy.GetComponent<EnemyMovement>().player = player;
+        newEnemy.GetComponent<Enemy>().player = player;
     }
 }
