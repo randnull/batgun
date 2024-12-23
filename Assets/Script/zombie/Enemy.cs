@@ -3,6 +3,8 @@ using UnityEngine;
 public class Enemy: MonoBehaviour
 {
     public Transform player;
+
+	public int damageSize = 10;
     public float speed = 3f;  
     
     void Update()
@@ -19,4 +21,11 @@ public class Enemy: MonoBehaviour
             transform.rotation = Quaternion.RotateTowards(transform.rotation, RotationToPlayer, 360 * Time.deltaTime);
         }
     }
+
+	void OnCollisionEnter(Collision collision) {
+		if (collision.gameObject.CompareTag("Player")) {
+			Stats playerStats = collision.gameObject.GetComponent<Stats>();
+			playerStats.TakeDamage(damageSize);
+		}
+	}
 }
