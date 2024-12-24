@@ -2,9 +2,10 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.SceneManagement;
-public class menu : MonoBehaviour
+
+public class gameover : MonoBehaviour
 {
-    public void Play()
+    public void RestartGame()
     {
         SceneManager.LoadScene("Game");
     }

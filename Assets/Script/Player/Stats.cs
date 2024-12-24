@@ -2,6 +2,8 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.UI;
+using UnityEngine.SceneManagement;
+
 public class Stats : MonoBehaviour
 {
     public int startHealth = 100;
@@ -36,5 +38,6 @@ public class Stats : MonoBehaviour
     void PlayerDie()
     {
         Debug.Log("Player Die");
+		SceneManager.LoadScene("GameOver");
     }
 }
