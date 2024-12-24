@@ -8,19 +8,11 @@ public class GroundController : MonoBehaviour
     public GameObject[] blocks;
 
     // Start is called before the first frame update
-    void Start()
+    public void Start()
     {
         blocks = new GameObject[this.gameObject.transform.childCount];
         for (int i = 0; i < blocks.Length; i++) {
             blocks[i] = this.gameObject.transform.GetChild(i).gameObject;
-        }
-    }
-
-    // Update is called once per frame
-    void Update()
-    {
-        if (Input.GetMouseButtonDown(1)) {
-            ChangeGround();
         }
     }
 

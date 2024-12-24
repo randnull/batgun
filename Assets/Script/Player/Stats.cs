@@ -6,8 +6,8 @@ using UnityEngine.SceneManagement;
 
 public class Stats : MonoBehaviour
 {
-    public int startHealth = 100;
-    public int currHealth;
+    public float startHealth = 100f;
+    public float currHealth;
     public Text HealthText;
 
     void Start()
@@ -16,9 +16,15 @@ public class Stats : MonoBehaviour
         UpdateHealthText();
     }
 
-    public void TakeDamage(int damage)
+	void Update() {
+		if (this.gameObject.transform.position.y < -5f) {
+			PlayerDie();
+		}
+	}
+
+    public void TakeDamage(float damage)
     {
-        if (currHealth <= 0)
+        if (currHealth <= 0.01f)
         {
             PlayerDie();
         }
@@ -32,11 +38,13 @@ public class Stats : MonoBehaviour
 
     void UpdateHealthText()
     {
-        HealthText.text = "HP: " + currHealth;
+        HealthText.text = "HP: " + (int)currHealth;
     }
 
-    void PlayerDie()
+    public void PlayerDie()
     {
+		Cursor.lockState = CursorLockMode.None;
+       	Cursor.visible = true;
         Debug.Log("Player Die");
 		SceneManager.LoadScene("GameOver");
     }
