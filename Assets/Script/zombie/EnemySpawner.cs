@@ -10,11 +10,12 @@ public class EnemySpawner : MonoBehaviour
     private float WaveDuration = 10f;
     public Transform player;
     public TextManager waveText;
-
+	public GroundController ground;
     private List<GameObject> spawnedEnemies = new List<GameObject>();
     
     void Start()
     {
+		ground.Start();
         StartCoroutine(SpawnEnemies());
     }
 
@@ -22,6 +23,12 @@ public class EnemySpawner : MonoBehaviour
     {
         while (true)
         {
+			ground.ChangeGround();
+
+			if (curWave == 1) {
+				yield return new WaitForSeconds(3f);
+			}
+
             Debug.Log("Wave # " + curWave);
             
             waveText.StartWave(curWave, WaveDuration);
@@ -37,8 +44,10 @@ public class EnemySpawner : MonoBehaviour
             yield return new WaitForSeconds(WaveDuration);
             
             ClearOldEnemies();
+
+            yield return new WaitForSeconds(3f);
             
-            WaveDuration += 30f;
+            WaveDuration += 2f;
             curWave += 1;
         }
     }
@@ -60,7 +69,7 @@ public class EnemySpawner : MonoBehaviour
 
     void ClearOldEnemies()
     {
-        foreach (GameObject enemy in spawnedEnemies) 
+        foreach (GameObject enemy in spawnedEnemies)
         {
             if (enemy != null)
             {

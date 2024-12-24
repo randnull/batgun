@@ -4,8 +4,8 @@ public class Enemy: MonoBehaviour
 {
     public Transform player;
 
-	public int damageSize = 10;
-    public float speed = 3f;  
+	public float damageSize = 10f;
+    public float speed = 3f;
     
     void Update()
     {
@@ -22,10 +22,10 @@ public class Enemy: MonoBehaviour
         }
     }
 
-	void OnCollisionEnter(Collision collision) {
-		if (collision.gameObject.CompareTag("Player")) {
-			Stats playerStats = collision.gameObject.GetComponent<Stats>();
-			playerStats.TakeDamage(damageSize);
+	void OnTriggerStay(Collider collider) {
+		if (collider.CompareTag("Player")) {
+			Stats playerStats = collider.GetComponent<Stats>();
+			playerStats.TakeDamage(damageSize * Time.deltaTime);
 		}
 	}
 }

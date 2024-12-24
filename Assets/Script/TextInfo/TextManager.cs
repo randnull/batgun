@@ -14,6 +14,7 @@ public class TextManager : MonoBehaviour
         if (remainingTime > 0f)
         {
             remainingTime -= Time.deltaTime;
+			remainingTime = Mathf.Max(remainingTime, 0.00f);
             UpdateTimer();
         }
     }
